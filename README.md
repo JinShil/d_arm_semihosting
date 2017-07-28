@@ -2,9 +2,9 @@
 
 This repository is an ARM Semihosting library written in the D programming language intended to be used with ARM Cortex-M microcontrollers.
 
-It exposes each semihosting operation as a function rather than exposing and `enum` of operations and a single function that takes one of said `enum`s.  The hope is that users won't need to learn how to use each operation, but instead, can understand how to use each operation by glancing at each operation's function definition.
+Each semihosting operation is exposed as a function rather than exposing an `enum` of operations and a single function that takes one of said `enum`s.  The hope is that users won't need to learn how to use each operation by reading documentation, but instead, can understand how to use each operation by glancing at each operation's function definition.
 
-This library is very incomplete; it currently only implements the semihosting *write* operations.  
+This library is very incomplete; it currently only implements the semihosting *write* operations.
 
 ## Building and Testing
 
