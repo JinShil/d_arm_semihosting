@@ -83,7 +83,7 @@ private void onReset()
 {
     // copy data segment out of ROM and into RAM
     size_t dataSize = &__data_end__ - &__data_start__;
-    byte[] dataROM = (cast(byte*)&__text_end__)[0 .. dataSize];
+    immutable(byte[]) dataROM = (cast(immutable byte*)&__text_end__)[0 .. dataSize];
     byte[] dataRAM = (cast(byte*)&__data_start__)[0 .. dataSize];
     dataRAM[0 .. dataSize] = dataROM[0 .. dataSize];
     
