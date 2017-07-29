@@ -31,23 +31,30 @@ void main(string[] args)
     auto cmd = "rm -f " ~ binaryDir ~ "/*";
     run(cmd);
 
-    auto sourceFiles = sourceDir
+    immutable auto sourceFiles = sourceDir
 		.dirEntries("*.d", SpanMode.depth)
-		//.filter!(a => !a.name.startsWith("source/runtime")) // runtime will be imported automatically
-		.map!"a.name"
+        .map!"a.name"
         .join(" ");
 
     // compile to temporary assembly file
-    cmd = "arm-none-eabi-gdc -c -Os -nophoboslib -nostdinc -nodefaultlibs -nostdlib"
+    cmd = "arm-none-eabi-gdc -c -g -Os -nophoboslib -nostdinc -nodefaultlibs -nostdlib"
           ~ " -mthumb -mcpu=cortex-m4 -mtune=cortex-m4"
-          //~ " -Isource/runtime" // to import runtime automatically
-          ~ " -fno-bounds-check -fno-invariants -fno-in -fno-out" // -fno-assert gives me a broken binary          
+          ~ " -fno-bounds-check"
+          ~ " -fno-invariants"
+          ~ " -fno-in"
+          ~ " -fno-out"
+          ~ " -fno-assert"          
           ~ " -ffunction-sections"
           ~ " -fdata-sections" 
           
           ~ " " ~ sourceFiles
           ~ " -o " ~ objectFile;                  
     run(cmd);
+
+    // cmd = "ldc2 -c -march=thumb -mcpu=cortex-m4"
+    //       ~ " " ~ sourceFiles
+    //       ~ " -of " ~ objectFile;                  
+    // run(cmd);
 
     // link, creating executable
     cmd = "arm-none-eabi-ld " ~ objectFile ~ " -Tlinker.ld --gc-sections -o " ~ outputFile;

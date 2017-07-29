@@ -113,12 +113,25 @@ private int call(in SYS operation, in void* message)
             "mov r0, %[op]; 
             mov r1, %[msg]; 
             bkpt #0xAB;
-            mov %[retVal], r0;"
-            : [retVal] "=r" value                             
+            mov %[val], r0;"
+            : [val] "=r" value                             
             : [op] "r" operation, [msg] "r" message
             : "r0", "r1", "memory";
         };
     }
+    // else version(LDC)
+    // {
+    //     import ldc.llvmasm;
+    //     __asm
+    //     (
+    //         "mov r0, $0;
+    //         mov r1, $1;
+    //         bkpt #0xAB;
+    //         mov $2, r0",
+    //         "r,r,~{r0},~{r1}",
+    //         operation, message, value
+    //     );
+    // }
 
     return value;
 }
