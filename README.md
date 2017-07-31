@@ -25,4 +25,4 @@ The test program is designed to be run with [OpenOCD](http://openocd.org/) and t
   * [What is semihosting?](http://www.keil.com/support/man/docs/armcc/armcc_pge1358787046598.htm)
 
 ## License
-  * See COPYING.
+  * See LICENSE.
