@@ -10,13 +10,13 @@ This library is very incomplete; it currently only implements the semihosting *w
 
 A simple test that uses the semihosting library can be found in the *test* directory.  It has been implemented and tested on only a Linux host and an STM32F4 MCU.  Other MCUs can likely be supported by modifying *linker.ld* and *openocd.sh* appropriately.
 
-To build the test program, change into the *test* and run `rdmd build.d`.  
+To build the test program, change into the *test* directory and run `rdmd build.d`.  
 
 This test program can only be built with the GDC ARM cross-compiler like [this one](https://github.com/JinShil/arm-none-eabi-gdc).  Support for LDC has not yet been added.
 
 The test program is designed to be run with [OpenOCD](http://openocd.org/) and the *arm-none-eabi-gdb* debugger, a component of the [GNU ARM Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm).  Both of which may be obtained from a linux distribution's package manager.
 
-   1.  Execute *openocd.sh* to start and instance of the OpenOCD GDB server.
+   1.  Execute *openocd.sh* to start an instance of the OpenOCD GDB server.
    2.  Execute *gdb.sh* to start an instance of *arm-none-eabi-gdb* client.  It will connect to the OpenOCD GDB server, upload the binary, and begin executing the program.
    3.  Test output should appear in the OpenOCD window.
 
